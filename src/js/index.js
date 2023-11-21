@@ -1,4 +1,4 @@
-import {fetchBreeds, breedSelectCreate, fetchCatByBreed, catInfomarkupCreate} from "./cat-api"
+import {fetchBreeds, breedSelectCreate, fetchCatByBreed, catInfoMarkupCreate} from "./cat-api"
 
 const refs = {
     breedSelectEl: document.querySelector(".breed-select"),
@@ -7,6 +7,7 @@ const refs = {
 
 
 fetchBreeds().then(({data}) => {
+    console.log(data)
     return data
 }).then((resp) => {
     refs.breedSelectEl.innerHTML = breedSelectCreate(resp)
@@ -15,7 +16,7 @@ fetchBreeds().then(({data}) => {
 refs.breedSelectEl.addEventListener('change', (e) => {
     let id = e.currentTarget.value
     fetchCatByBreed(id).then(({data}) => {
-        console.log(data[0].breeds)
-        refs.catInfoBlock.innerHTML = catInfomarkupCreate(data[0].breeds)
+        console.log(data)
+        refs.catInfoBlock.innerHTML = catInfoMarkupCreate(data)
     })
 })

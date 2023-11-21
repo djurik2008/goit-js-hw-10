@@ -20,8 +20,8 @@ export function fetchCatByBreed(breedId) {
     return axios.get(`${BASE_URL}/images/search?breed_ids=${breedId}`)
 }
 
-export function catInfomarkupCreate(arr) {
-    return arr.map(({url, name, description, temperament}) =>
+export function catInfoMarkupCreate(arr) {
+    return arr.map(({ url, breeds: { name, description, temperament } }) =>
     `<img src="${url}" alt="${name}" class="cat-img">
     <h2 class="breed-name">Cat breed: ${name}</h2>
     <p class="breed-descr">Description of the breed: ${description}</p>
