@@ -21,9 +21,13 @@ export function fetchCatByBreed(breedId) {
 }
 
 export function catInfoMarkupCreate(arr) {
-    return arr.map(({ url, breeds: { name, description, temperament } }) =>
-    `<img src="${url}" alt="${name}" class="cat-img">
-    <h2 class="breed-name">Cat breed: ${name}</h2>
-    <p class="breed-descr">Description of the breed: ${description}</p>
-    <p class="breed-temper">Cat temperament: ${temperament}</p>`).join("")
+    return arr.map(({ name,
+        description,
+        temperament,
+        alt_names,
+        reference_image_id: img_id }) =>
+    `<img src="https://cdn2.thecatapi.com/images/${img_id}.jpg" alt="${alt_names}" class="cat-img">
+    <h2 class="breed-name">${name}</h2>
+    <p class="breed-descr">${description}</p>
+    <p class="breed-temper">temperament: ${temperament}</p>`).join("")
 }

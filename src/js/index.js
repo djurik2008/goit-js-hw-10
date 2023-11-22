@@ -7,16 +7,15 @@ const refs = {
 
 
 fetchBreeds().then(({data}) => {
-    console.log(data)
     return data
 }).then((resp) => {
     refs.breedSelectEl.innerHTML = breedSelectCreate(resp)
+    console.dir(refs.breedSelectEl)
 })
 
 refs.breedSelectEl.addEventListener('change', (e) => {
     let id = e.currentTarget.value
     fetchCatByBreed(id).then(({data}) => {
-        console.log(data)
-        refs.catInfoBlock.innerHTML = catInfoMarkupCreate(data)
+        refs.catInfoBlock.innerHTML = catInfoMarkupCreate(data[0].breeds)
     })
 })
