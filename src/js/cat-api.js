@@ -10,9 +10,12 @@ export function fetchBreeds() {
 }
 
 export function breedSelectCreate(arr) {
-    return arr.map(({name, id}) =>
-    `<option value="${id}">${name}</option>`
-    ).join("")
+    return arr.map(({name, id}) => {
+        const option = {}
+        option.text = name
+        option.value = id
+        return option
+    })
 }
 
 
@@ -26,8 +29,10 @@ export function catInfoMarkupCreate(arr) {
         temperament,
         alt_names,
         reference_image_id: img_id }) =>
-    `<img src="https://cdn2.thecatapi.com/images/${img_id}.jpg" alt="${alt_names}" class="cat-img">
+    `<div class="box-img"><img src="https://cdn2.thecatapi.com/images/${img_id}.jpg" alt="${alt_names}" class="cat-img" width="400"></div>
+    <div class="box-info">
     <h2 class="breed-name">${name}</h2>
     <p class="breed-descr">${description}</p>
-    <p class="breed-temper">temperament: ${temperament}</p>`).join("")
+    <p class="breed-temper">temperament: ${temperament}</p>
+    </div>`).join("")
 }
