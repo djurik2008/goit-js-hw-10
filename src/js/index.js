@@ -1,4 +1,8 @@
-import {fetchBreeds, breedSelectCreate, fetchCatByBreed, catInfoMarkupCreate} from "./cat-api"
+import {fetchBreeds,
+    breedSelectCreate,
+    fetchCatByBreed,
+    catInfoMarkupCreate,
+    onFetchError} from "./cat-api"
 import SlimSelect from 'slim-select'
 import 'slim-select/dist/slimselect.css';
 
@@ -10,29 +14,35 @@ const refs = {
     errorEl: document.querySelector(".error")
 }
 
+refs.loaderEl.classList.replace('loader', 'is-hidden')
+
 fetchBreeds().then(({data}) => {
-    // refs.loaderEl.classList.remove('is-hidden')
+    refs.loaderEl.classList.replace('is-hidden', 'loader')
     return data
 }).then((resp) => {
     const arrOfOption = breedSelectCreate(resp)
-    arrOfOption.unshift({placeholder: true, text: 'Select breed'})
-    new SlimSelect({
+    // arrOfOption.unshift({placeholder: true, text: 'Select breed'})
+    const select = new SlimSelect({
         select: refs.breedSelectEl,
       
         data: arrOfOption,
         settings: {
             showSearch: false,
-            allowDeselect: true
+            // allowDeselect: true
         }
     })
-    refs.loaderEl.classList.remove('is-hidden')
-})
+    select.setSelected('Abyssinian')
+    refs.loaderEl.classList.replace('loader', 'is-hidden')
+}).catch(onFetchError)
 
 refs.breedSelectEl.addEventListener('change', (e) => {
+    refs.loaderEl.classList.replace('is-hidden', 'loader')
     const id = e.currentTarget.value
+    
     fetchCatByBreed(id).then(({data}) => {
-        refs.catInfoBlock.innerHTML = catInfoMarkupCreate(data[0].breeds)
-    }).catch((err) => {
-        console.log(err)
-    })
+        const { url, breeds } = data[0];
+        refs.catInfoBlock.innerHTML = catInfoMarkupCreate(breeds, url)
+        refs.loaderEl.classList.replace('loader', 'is-hidden')
+    }).catch(onFetchError)    
+    
 })

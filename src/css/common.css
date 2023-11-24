@@ -42,14 +42,29 @@
   }
 
   .cat-info {
+    display: flex;
+    column-gap: 50px;
     margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #0d161b;
+    /* margin-top: 20px;
     padding: 20px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 40px;
     background-color: #e5f3f2;
-    border: 1px solid #0d161b;
+    border: 1px solid #0d161b; */
+}
+
+.breed-name {
+  font-size: 30px;
+  margin-bottom: 15px;
+}
+
+.breed-descr {
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 
 .is-hidden {
@@ -58,14 +73,14 @@
   opacity: 0;
 }
 
-/* .box-img {
+.box-img {
   display: flex;
   align-items: center;
-} */
+}
 
-  /* .box-info {
+ .box-info {
   width: 400px;
-} */
+}
 
 .loader {
   color: #b62020;
@@ -76,6 +91,7 @@
   height: 1em;
   border-radius: 50%;
   position: relative;
+  margin: auto;
   transform: translateZ(0);
   animation: mltShdSpin 1.7s infinite ease, round 1.7s infinite ease;
 }
