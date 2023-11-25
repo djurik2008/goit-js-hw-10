@@ -48,5 +48,8 @@ refs.breedSelectEl.addEventListener('change', (e) => {
         refs.catInfoBlock.innerHTML = catInfoMarkupCreate(breeds, url)
         refs.loaderEl.classList.replace('loader', 'is-hidden')
         refs.catInfoBlock.classList.remove('is-hidden')
-    }).catch(onFetchError)
+    }).catch(() => {
+        onFetchError()
+        refs.loaderEl.classList.replace('loader', 'is-hidden')
+    })
 })

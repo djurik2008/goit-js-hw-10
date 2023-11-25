@@ -40,7 +40,7 @@ export function catInfoMarkupCreate(arr, url) {
 export function onFetchError(error) {
     Notify.failure('Oops! Something went wrong! Try reloading the page or select another cat breed!', {
         position: 'center-center',
-        timeout: 5000,
+        timeout: 3000,
         width: '400px',
         fontSize: '24px'
     });
